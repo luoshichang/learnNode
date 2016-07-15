@@ -72,7 +72,7 @@ app.get('/admin/update/:id',function(req,res){
         })
     }
 })
-//
+//data get page
 app.post('/admin/movie/new', function (req, res) {
     var movieObj = req.body.movie
     var id = movieObj._id

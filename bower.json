@@ -1,0 +1,25 @@
+{
+  "name": "movie",
+  "description": "111",
+  "main": "app.js",
+  "authors": [
+    "luoshichang"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "movies"
+  ],
+  "homepage": "https://github.com/luoshichang/learnNode",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

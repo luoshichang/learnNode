@@ -1,0 +1,37 @@
+{
+  "name": "movie",
+  "version": "0.0.1",
+  "description": "111",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "jade": "^1.11.0",
+    "moment": "^2.14.1",
+    "mongoose": "^4.5.4",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-nodemon": "^0.5.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luoshichang/learnNode.git"
+  },
+  "keywords": [
+    "movies"
+  ],
+  "author": "luoshichang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luoshichang/learnNode/issues"
+  },
+  "homepage": "https://github.com/luoshichang/learnNode#readme"
+}
