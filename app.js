@@ -9,18 +9,18 @@ var User = require('./models/user')
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser');
 var app=express()
+var dbUrl = 'mongodb://localhost/learnNode'
 
-mongoose.connect('mongodb://localhost/learnNode')
+mongoose.connect(dbUrl)
 
 app.set('views', 'views/pages')
 app.use(cookieParser());
 app.use(cookieSession(
     {
         secret: 'movie',
-        resave:false,
-        saveUninitialized:true
     })
 )
+
 app.set('view engine','jade')
 app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded({extended:true}))
@@ -29,10 +29,16 @@ app.listen(port)
 
 console.log('this app started on port:'+port)
 
+app.use(function(req,res,next){
+    var _user = req.session.user
+    if(_user){
+        app.locals.user = _user
+    }
+    return next()
+
+})
 //index page
 app.get('/',function(req,res){
-
-    console.log(req.session.user)
     Movie.fetch(function(err,movies){
         if(err){
             console.log(err)
@@ -40,7 +46,7 @@ app.get('/',function(req,res){
 
     res.render('index',{
         title:'电影首页',
-        movies:movies
+        movies:movies,
     })
      })
 })
@@ -212,4 +218,12 @@ app.post('/user/signin',function(req,res){
             }
         })
     })
+})
+
+//logout
+app.get('/logout',function(req,res){
+    delete req.session.user
+   delete app.locals.user
+
+    res.redirect('/')
 })
