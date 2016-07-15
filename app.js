@@ -12,7 +12,7 @@ var dbUrl = 'mongodb://localhost/learnNode'
 
 mongoose.connect(dbUrl)
 
-app.set('views', 'views/pages')
+app.set('views', './app/views/pages')
 app.use(cookieParser());
 app.use(cookieSession(
     {
