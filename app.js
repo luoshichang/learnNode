@@ -2,7 +2,10 @@ var express=require('express')
 var path = require('path')
 var port=process.env.POST || 3000
 var _ = require('underscore')
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session')
 var Movie = require('./models/movie')
+var User = require('./models/user')
 var mongoose = require('mongoose')
 var bodyParser= require('body-parser');
 var app=express()
@@ -10,6 +13,14 @@ var app=express()
 mongoose.connect('mongodb://localhost/learnNode')
 
 app.set('views', 'views/pages')
+app.use(cookieParser());
+app.use(cookieSession(
+    {
+        secret: 'movie',
+        resave:false,
+        saveUninitialized:true
+    })
+)
 app.set('view engine','jade')
 app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded({extended:true}))
@@ -20,6 +31,8 @@ console.log('this app started on port:'+port)
 
 //index page
 app.get('/',function(req,res){
+
+    console.log(req.session.user)
     Movie.fetch(function(err,movies){
         if(err){
             console.log(err)
@@ -124,6 +137,18 @@ app.get('/admin/list',function(req,res){
         })
     })
 })
+//userlist page
+app.get('/admin/userlist',function(req,res){
+    User.fetch(function(err,users){
+        if(err){
+            console.log(err)
+        }
+        res.render('userlist',{
+            title:'用户列表页',
+            users:users
+        })
+    })
+})
 //list delete movie
 app.delete('/admin/list',function(req,res){
     var id = req.query.id
@@ -137,4 +162,54 @@ app.delete('/admin/list',function(req,res){
             }
         })
     }
+})
+
+//signup
+app.post('/user/signup',function(req,res){
+   var _user = req.body.user
+User.findOne({name:_user.name},function(err,user){
+    if(err){
+        console.log(err)
+    }
+    if(user){
+        return res.redirect('/')
+    }
+    else{
+        var user =  new User(_user)
+        user.save(function(err,user){
+            if(err){
+                console.log(err)
+            }
+        })
+        res.redirect('/admin/userlist')
+    }
+})
+})
+
+//signin
+app.post('/user/signin',function(req,res){
+    var _user = req.body.user
+    var name = _user.name
+    var password = _user.password
+
+    User.findOne({name: name},function(err,user){
+        if(err){
+            console.log(err)
+        }
+        if(!user){
+            return res.redirect('/')
+        }
+        user.comparePassword(password,function(err,isMatch){
+            if(err){
+                console.log(err)
+            }
+            if(isMatch){
+                req.session.user = user
+                console.log('password is matched')
+               return res.redirect('/')
+            }else{
+              console.log('password is not matched')
+            }
+        })
+    })
 })
