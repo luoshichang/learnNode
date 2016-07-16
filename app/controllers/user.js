@@ -7,7 +7,7 @@ exports.signup=function(req,res){
             console.log(err)
         }
         if(user){
-            return res.redirect('/')
+            return res.redirect('/signin')
         }
         else{
             var user =  new User(_user)
@@ -16,7 +16,7 @@ exports.signup=function(req,res){
                     console.log(err)
                 }
             })
-            res.redirect('/admin/userlist')
+            res.redirect('/')
         }
     })
 }
@@ -31,7 +31,7 @@ exports.signin=function(req,res) {
                 console.log(err)
             }
             if (!user) {
-                return res.redirect('/')
+                return res.redirect('/signup')
             }
             user.comparePassword(password, function (err, isMatch) {
                 if (err) {
@@ -42,7 +42,7 @@ exports.signin=function(req,res) {
                     console.log('password is matched')
                     return res.redirect('/')
                 } else {
-                    console.log('password is not matched')
+                    return res.redirect('/signup')
                 }
             })
         })
@@ -55,6 +55,7 @@ exports.logout=function(req,res) {
 }
 //userlist page
 exports.list=function(req,res) {
+
         User.fetch(function (err, users) {
             if (err) {
                 console.log(err)
@@ -64,4 +65,38 @@ exports.list=function(req,res) {
                 users: users
             })
         })
+}
+//signip page
+exports.showSignup=function(req,res) {
+
+        res.render('signup', {
+            title: '注册页面',
+        })
+}
+//signin page
+exports.showSignin=function(req,res) {
+        res.render('signin', {
+            title: '登录页面',
+        })
+}
+
+//midware for user
+exports.signinRequired = function(req,res,next){
+    var user = req.session.user
+    if(!user){
+        return res.redirect('/signin')
+        next()
+    }
+    next()
+}
+//midware for user
+exports.adminRequired = function(req,res,next){
+    var user = req.session.user
+    if(user.role <= 10){
+        next();
+    }
+    else{
+        return adminError(res, '管理员权限不足', '/admin/user/list');
+    }
+
 }

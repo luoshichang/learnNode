@@ -84,15 +84,15 @@ exports.save=function(req,res){
 }
 //list page
 exports.list=function(req,res){
-    Movie.fetch(function(err,movies){
-        if(err){
-            console.log(err)
-        }
-        res.render('list',{
-            title:'电影列表页',
-            movies:movies
+        Movie.fetch(function (err, movies) {
+            if (err) {
+                console.log(err)
+            }
+            res.render('list', {
+                title: '电影列表页',
+                movies: movies
+            })
         })
-    })
 }
 //list delete movie
 exports.del=function(req,res){
