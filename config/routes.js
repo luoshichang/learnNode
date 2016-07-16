@@ -1,6 +1,8 @@
 var Index = require('../app/controllers/index')
 var User = require('../app/controllers/user')
 var Movie = require('../app/controllers/movie')
+var Comment = require('../app/controllers/comment')
+
 module.exports = function(app){
 app.use(function(req,res,next){
     var _user = req.session.user
@@ -26,5 +28,8 @@ app.use(function(req,res,next){
     app.get('/admin/list',User.signinRequired,User.adminRequired,Movie.list)
     app.delete('/admin/list',User.signinRequired,User.adminRequired,Movie.del)
 
+
+// Comment
+    app.post('/user/comment',User.signinRequired,Comment.save)
 
 }
