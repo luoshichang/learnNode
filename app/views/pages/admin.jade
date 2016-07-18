@@ -9,7 +9,10 @@ block content
                 .form-group
                     label.col-sm-2.control-label(for="inputcategory")  电影分类
                     .col-sm-10
-                        input#inputcategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName)
+                        if movie.category
+                            input#inputcategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName,disabled)
+                        else
+                            input#inputcategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName)
                 .form-group
                     label.col-sm-2.control-label 分类选择
                     each cat in categories
