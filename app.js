@@ -13,6 +13,7 @@ var dbUrl = 'mongodb://localhost/learnNode'
 mongoose.connect(dbUrl)
 
 app.set('views', './app/views/pages')
+app.use(require('connect-multiparty')());
 app.use(cookieParser());
 app.use(cookieSession(
     {
