@@ -4,13 +4,13 @@
 本项目电影首页交互代码是由jQuery以及Bootsrap完成
 
 1. 项目后端搭建:
-2. 
+
 使用NodeJs的express框架完成电影网站后端搭建;
 使用mongodb完成数据存储,通过mongoose模块完成对mongodb数据的构建;
 使用jade模板引擎完成页面创建渲染;
 
 2. 项目前端搭建:
-3. 
+
 使用jQuery和Bootsrap完成网站前端JS脚本和样式处理;
 前后端的数据请求交互通过Ajax完成;
 
