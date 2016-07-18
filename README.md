@@ -1,24 +1,26 @@
-电影信息
+基于NodeJs+MongoDB+jQuery搭建的电影分享网站
+简介:
 
+本项目电影首页交互代码是由jQuery完成
 
-使用框架和类库
+1. 项目后端搭建:
 
-本项目使用node作为后台开发语言，并以express4.X为类库，mongodb为数据库开发的。 node库使用相关类库
+使用NodeJs的express框架完成电影网站后端搭建;
+使用mongodb完成数据存储,通过mongoose模块完成对mongodb数据的构建;
+使用jade模板引擎完成页面创建渲染;
+2. 项目前端搭建:
+使用jQuery和Bootsrap完成网站前端JS脚本和样式处理;
+前后端的数据请求交互通过Ajax完成;
+3. 网站整体功能:
 
-express4.x
-jade
-mongoose
-underscore
-path
-body-parser
-前端使用相关类库
+网站正常访问无需管理原权限，以下网站数据的添加及删除功能需要登录管理员账号。
 
-bootstrap
-jquery
-项目介绍
+电影展示页面;
+具有用户注册登录及管理;
+电影详情页面添加及删除评论;
+电影信息录入和搜索;
+电影分类添加及删除;
+电影海报自定义上传;
+列表分页处理;
+访客统计;
 
-本项目主要有4个页面，分别为：首页，列表页，新增录入页，详情页面。处理逻辑有新增，修改，删除操作。
-
-tips
-
-clone或者直接下载本代码库后，需要安装node，mongodb环境，之后再项目根目录下运行npm install && bower install 安装应用到的类库。
