@@ -118,7 +118,6 @@ exports.save = function(req, res) {
             }
         })
     }
-    console.log(123)
 }
 //list page
 exports.list=function(req,res){
