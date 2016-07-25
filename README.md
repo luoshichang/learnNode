@@ -1,6 +1,7 @@
 基于NodeJs+MongoDB+jQuery搭建的电影分享网站
 
 简介:
+
  本项目电影首页交互代码是由jQuery以及Bootsrap完成
 
  1,项目后端搭建:
